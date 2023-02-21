@@ -13,14 +13,38 @@ body {
     background-image: url("../media/Horizoon.png");
     background-position: center;
     background-size: cover;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(20px);
     flex-direction: column;
+}
+
+#message-hidden {
+    display: none;
+}
+
+.message-container {
+    background-color: rgba(255, 255, 255, .5);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 1;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-holder {
+    background-color: white;
+    padding: 10px 100px;
+    border-radius: 10px;
 }
 
 header {
     display: flex;
     align-items: center;
-    gap: 240px;
+    gap: 180px;
     position: absolute;
     top: 10px;
 }
@@ -28,6 +52,13 @@ header {
 img {
     height: 30px;
     width: 30px;
+    position: relative;
+    left: -30px;
+}
+
+header > p {
+    position: relative;
+    right: -25px;
 }
 
 .container {

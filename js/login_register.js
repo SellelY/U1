@@ -1,50 +1,73 @@
 "use strict";
 
-function setFormMessage(formElement, type, message) {
-    const messageElement = formElement.querySelector(".form__message");
+async function registerUser(event) {
+  event.preventDefault(); // prevent the form from submitting
 
-    messageElement.textContent = message;
-    messageElement.classList.remove("form__message--success", "form__message--error");
-    messageElement.classList.add(`form__message--${type}`);
+  const formElement = event.target;
+  const usernameValue = formElement.querySelector(".usernameR").value;
+  const passwordValue = formElement.querySelector(".passwordR").value;
+
+  const POSTrqst = new Request(URL, {
+    method: "POST",
+    headers: {"Content-type": "application/json; charset=UTF-8"},
+    body: JSON.stringify({
+      action: "register",
+      user_name: usernameValue,
+      password: passwordValue
+    }),
+  });
+
+  try {
+    const response = await fetch(POSTrqst);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      connectFeedback(response.status);
+    } else {
+      connectFeedback(response.status);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.getElementById("login");
-    const registerForm = document.getElementById("register");
-
-    document.querySelector("#linkCreateAccount").addEventListener("click", e => {
-        e.preventDefault();
-        loginForm.classList.add("form--hidden");
-        registerForm.classList.remove("form--hidden");
-        document.querySelector(".form__input-group").value = "";
-
-  
-    });
-
-    document.querySelector("#linkLogin").addEventListener("click", e => {
-        e.preventDefault
-        loginForm.classList.remove("form--hidden");
-        registerForm.classList.add("form--hidden");
-        document.querySelector(".form__input-group").value = "";
-    });
-
-    // loginForm.addEventListener("submit", e => {
-    //     e.preventDefault();
-
-    //     //fetch
-
-    //     setFormMessage(loginForm, "error", "Wrong username or password.")
-    // })
-});
-
-const form = document.getElementById("register");
-form.addEventListener("submit", event => {
-event.preventDefault(); // prevent the form from submitting via HTTP POST
-const user_name = document.querySelector(".usernameInput").value;
-const password_ = document.querySelector(".passwordInput").value;
-fetchData(user_name, password_);
-});
+const registerForm = document.querySelector("#register");
+registerForm.addEventListener("submit", registerUser);
 
 
+async function loginUser(event) {
+  event.preventDefault();
 
+  const username = document.querySelector(".username").value;
+  const password = document.querySelector(".password").value;
 
+  const GETrequest = new Request(`${URL}prefix?action=check_credentials&user_name=${username}&password=${password}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+
+  });
+
+  try {
+    const response = await fetch(GETrequest);
+
+    if(response.ok) {
+      const data = await response.json(); // process the response data
+      connectFeedback(200);
+    } else if(response.status === 401) {
+      connectFeedback(401);
+    } else if(response.status === 418) {
+      connectFeedback(418);
+    } else {
+      connectFeedback(response.status);
+    }
+
+  } catch(error) {
+    console.error(error);
+  }
+
+}
+
+const loginForm = document.querySelector("#login");
+loginForm.addEventListener("submit", loginUser);
