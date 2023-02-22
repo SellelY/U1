@@ -19,46 +19,44 @@ async function sendRequest(POSTorGET) {
 
 //message div
 function connectFeedback(status) {
-    const message = document.querySelector(".message");
-    const loginButton = document.querySelector("#login-register > button");
-
-    // hide message
-    message.classList.add("message-hidden");
+    const _status = document.querySelector(".status");
+    const loginButton = document.querySelector("#login button");
+    const messageDiv = document.querySelector("#message");
+    const closeButton = document.querySelector(".close");
+ 
     loginButton.disabled = true;
-
-    //Show connecting...
-    message.textContent = "Connecting...";
-    message.classList.remove("message-hidden");
 
     if(status === 200) {
 
-        message.textContent = "Login successful!";
-        const button = document.createElement("button");
-        button.textContent = "CLOSE";
-        button.id = "message-button";
-        message.appendChild(button);
-        button.addEventListener("click", () => {
-            message.classList.add("message-hidden");
-            loginButton.disabled = false;
+        _status.textContent = "Registration is successful!";
+        loginButton.disabled = false;
 
-        });
-    } else if(status === 401) {
+    } else if(status === 409) {
 
-        messageElement.textContent = "Invalid credentials";
+        _status.textContent = "Sorry, the name is already taken";
         loginButton.disabled = false;
 
     } else if(status === 418) {
 
-        messageElement.textContent = "I'm not a teapot!";
+        _status.textContent = "The server thinks it's not a teapot!";
         loginButton.disabled = false;
 
     } else {
 
-        messageElement.textContent = "An error occurred";
+        _status.textContent = "Wrong username or password";
         loginButton.disabled = false;
 
     }
-    messageElement.classList.remove("message-hidden");
+    messageDiv.classList.remove("hidden");
+
+    // show button
+    closeButton.style.display = "block";
+
+    closeButton.addEventListener("click", () => {
+        messageDiv.classList.add("hidden");
+        loginButton.disabled = false;
+
+    });
 }
 
 function setFormMessage(formElement, type, message) {

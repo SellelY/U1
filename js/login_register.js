@@ -17,18 +17,13 @@ async function registerUser(event) {
     }),
   });
 
-  try {
-    const response = await fetch(POSTrqst);
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      connectFeedback(response.status);
+  const resource = await sendRequest(POSTrqst);
+  if (resource === undefined) {
+    console.log(resource);
     } else {
-      connectFeedback(response.status);
+      connectFeedback(200);
     }
-  } catch (error) {
-    console.error(error);
-  }
+
 }
 
 const registerForm = document.querySelector("#register");
@@ -38,10 +33,20 @@ registerForm.addEventListener("submit", registerUser);
 async function loginUser(event) {
   event.preventDefault();
 
+  const messageDiv = document.querySelector("#message");
+  const _status = document.querySelector(".status");
+  messageDiv.classList.remove("hidden");
+  _status.textContent = "Connecting...";
+
+  // hide button
+  const closeButton = document.querySelector(".close");
+  closeButton.style.display = "none";
+
+
   const username = document.querySelector(".username").value;
   const password = document.querySelector(".password").value;
 
-  const GETrequest = new Request(`${URL}prefix?action=check_credentials&user_name=${username}&password=${password}`, {
+  const GETrequest = new Request(URL + `?action=check_credentials&user_name=${username}&password=${password}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8"
@@ -49,25 +54,35 @@ async function loginUser(event) {
 
   });
 
-  try {
-    const response = await fetch(GETrequest);
-
-    if(response.ok) {
-      const data = await response.json(); // process the response data
-      connectFeedback(200);
-    } else if(response.status === 401) {
-      connectFeedback(401);
-    } else if(response.status === 418) {
-      connectFeedback(418);
-    } else {
-      connectFeedback(response.status);
-    }
-
-  } catch(error) {
-    console.error(error);
+  const resource = await sendRequest(GETrequest);
+  if(resource === undefined) {
+    console.log(resource);
+  } else {
+    document.querySelector("#login_register").classList.add("hidden");
+    messageDiv.classList.add("hidden");
+    quizPage();
   }
 
 }
 
 const loginForm = document.querySelector("#login");
 loginForm.addEventListener("submit", loginUser);
+
+window.onload = function() {
+  const registerForm = document.querySelector("#register");
+  const loginForm = document.querySelector("#login");
+  const usernameInput = document.querySelectorAll(".username");
+  const passwordInput = document.querySelectorAll(".password");
+  const usernameRInput = document.querySelector(".usernameR");
+  const passwordRInput = document.querySelector(".passwordR");
+
+  if (registerForm !== null) {
+    usernameRInput.value = "";
+    passwordRInput.value = "";
+  }
+
+  if (loginForm !== null) {
+    usernameInput.forEach(input => input.value = "");
+    passwordInput.forEach(input => input.value = "");
+  }
+};

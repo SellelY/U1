@@ -17,9 +17,13 @@ body {
     flex-direction: column;
 }
 
-#message-hidden {
+.hidden {
     display: none;
 }
+
+/* .close--hidden {
+    display: none;
+} */
 
 .message-container {
     background-color: rgba(255, 255, 255, .5);
@@ -35,7 +39,7 @@ body {
     align-items: center;
 }
 
-.message-holder {
+#message-holder {
     background-color: white;
     padding: 10px 100px;
     border-radius: 10px;

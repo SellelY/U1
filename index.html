@@ -8,10 +8,11 @@
     <title>Dog Breed Quiz</title>
 </head>
 <body>
-    <div id="message-hidden">
+    <div id="message" class="hidden">
         <div class="message-container">
-            <div class="message-holder">
-                <p class="message"></p>
+            <div id="message-holder">
+                <p class="status"></p>
+                <button class="close close--hidden">CLOSE</button>
             </div>
         </div>
     </div>
@@ -19,7 +20,10 @@
         <img src="./media/logo.png" alt="">
         <p>Dog Breed Quiz</p>
     </header>
-    <div id="login-register">
+
+    <div id="quiz-page" class="hidden"></div>
+
+    <div id="login_register">
     
         <div class="container">
             <form class="form" id="login">
