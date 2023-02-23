@@ -23,31 +23,33 @@ function connectFeedback(status) {
     const loginButton = document.querySelector("#login button");
     const messageDiv = document.querySelector("#message");
     const closeButton = document.querySelector(".close");
+    const wrongPasswordOrUsername = document.querySelector(".wrong-user-pass");
  
     loginButton.disabled = true;
 
     if(status === 200) {
+        messageDiv.classList.remove("hidden");
 
         _status.textContent = "Registration is successful!";
         loginButton.disabled = false;
 
     } else if(status === 409) {
-
+        messageDiv.classList.remove("hidden");
         _status.textContent = "Sorry, the name is already taken";
         loginButton.disabled = false;
 
     } else if(status === 418) {
-
+        messageDiv.classList.remove("hidden");
         _status.textContent = "The server thinks it's not a teapot!";
         loginButton.disabled = false;
 
     } else {
-
-        _status.textContent = "Wrong username or password";
+        messageDiv.classList.add("hidden");
+        wrongPasswordOrUsername.classList.remove("hidden");
         loginButton.disabled = false;
 
     }
-    messageDiv.classList.remove("hidden");
+    
 
     // show button
     closeButton.style.display = "block";

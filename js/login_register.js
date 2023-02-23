@@ -3,6 +3,7 @@
 async function registerUser(event) {
   event.preventDefault(); // prevent the form from submitting
 
+
   const formElement = event.target;
   const usernameValue = formElement.querySelector(".usernameR").value;
   const passwordValue = formElement.querySelector(".passwordR").value;
@@ -35,6 +36,9 @@ async function loginUser(event) {
 
   const messageDiv = document.querySelector("#message");
   const _status = document.querySelector(".status");
+  const wrongPassOrUser = document.querySelector(".wrong-user-pass");
+
+  wrongPassOrUser.classList.add("hidden");
   messageDiv.classList.remove("hidden");
   _status.textContent = "Connecting...";
 
@@ -61,12 +65,32 @@ async function loginUser(event) {
     document.querySelector("#login_register").classList.add("hidden");
     messageDiv.classList.add("hidden");
     quizPage();
+    
   }
 
 }
 
 const loginForm = document.querySelector("#login");
 loginForm.addEventListener("submit", loginUser);
+
+window.onload = function() {
+  const registerForm = document.querySelector("#register");
+  const loginForm = document.querySelector("#login");
+  const usernameInput = document.querySelectorAll(".username");
+  const passwordInput = document.querySelectorAll(".password");
+  const usernameRInput = document.querySelector(".usernameR");
+  const passwordRInput = document.querySelector(".passwordR");
+
+  if(registerForm !== null) {
+    usernameRInput.value = "";
+    passwordRInput.value = "";
+  }
+
+  if(loginForm !== null) {
+    usernameInput.forEach(input => input.value = "");
+    passwordInput.forEach(input => input.value = "");
+  }
+}
 
 window.onload = function() {
   const registerForm = document.querySelector("#register");
@@ -85,4 +109,24 @@ window.onload = function() {
     usernameInput.forEach(input => input.value = "");
     passwordInput.forEach(input => input.value = "");
   }
+
+  // get stored classlist "hidden"
+  const loginRegister = document.querySelector("#login_register");
+  const quizPage = document.querySelector("#quiz-page");
+  const isHidden = localStorage.getItem("isLoginRegisterHidden");
+
+  if(isHidden === "true") {
+    loginRegister.classList.add("hidden");
+    quizPage.style.display = "block";
+  } else {
+    loginRegister.classList.remove("hidden");
+    quizPage.style.display = "none";
+  }
+
+  const logoutButton = document.querySelector(".logout-button");
+  logoutButton.addEventListener("click", () => {
+    quizPage.style.display = "none";
+    loginRegister.classList.remove("hidden");
+  })
+
 };

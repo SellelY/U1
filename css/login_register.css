@@ -21,9 +21,36 @@ body {
     display: none;
 }
 
-/* .close--hidden {
+#quiz-page {
     display: none;
-} */
+    height: 100%;
+    width: 100%;
+}
+
+.header-div {
+    position: absolute;
+    top: 60px;
+    left: 5%;
+    background-color: rgba(255, 255, 255, .3);
+    padding: 0 140px;
+    border-radius: 10px;
+}
+
+.logout-button {
+    position: relative;
+    top: 10px;
+    left: 125px;
+}
+
+.header-div > div {
+    display: flex;
+    align-items: center;
+}
+
+.display-username {
+    position: relative;
+    right: 125px;
+}
 
 .message-container {
     background-color: rgba(255, 255, 255, .5);
@@ -32,7 +59,7 @@ body {
     position: absolute;
     right: 0px;
     top: 0px;
-    z-index: 1;
+    z-index: 2;
     
     display: flex;
     justify-content: center;
@@ -98,9 +125,20 @@ h1 {
     text-align: center;
 }
 
+.wrong-user-pass {
+    font-size: 12px;
+    text-align: center;
+    background-color: white;
+    padding: 2px 25px;
+    border-radius: 2px;
+    z-index: 1;
+    position: absolute;
+    top: 342px;
+}
+
 button {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border-radius: 2px;
     border: none;
     cursor: pointer;
@@ -118,6 +156,9 @@ button:hover {
 
 footer{
     font-size: 11px;
+    position: absolute;
+    bottom: 10px;
+    left: 113px;
 }
 
 u {

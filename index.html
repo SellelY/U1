@@ -21,7 +21,16 @@
         <p>Dog Breed Quiz</p>
     </header>
 
-    <div id="quiz-page" class="hidden"></div>
+    <div id="quiz-page">
+
+        <div class="header-div">
+            <div>
+                <p class="display-username"></p>
+                <button class="logout-button">Logout</button>
+            </div>
+        </div>
+
+    </div>
 
     <div id="login_register">
     
@@ -41,16 +50,14 @@
                 </div>
                 
                 <div class="form__message form__message-error"></div>
+                <p class="wrong-user-pass hidden">Wrong username or password</p>
                 <p class="form__text">Let the magic start!</p>
                 <button type="submit">Login</button>
                 <p class="form__register">
                     <a id="linkCreateAccount">New to this? Register for free</a>
                 </p>
     
-                <footer>
-                    <p class="footer__text">The Dog Quiz is made possible thanks to <br>the free API by <u>DOG CEO Zine</u></p>
-                    
-                </footer>
+                
                 </div>
             </form>
     
@@ -75,13 +82,12 @@
                     <a id="linkLogin">Already have an account? Go to login</a>
                 </p>
     
-                <footer>
-                    <p class="footer__text">The Dog Quiz is made possible thanks to <br>the free API by <u>DOG CEO Zine</u></p>
-                    
-                </footer>
                 </div>
             </form>
-    
+            <footer>
+                <p class="footer__text">The Dog Quiz is made possible thanks to <br>the free API by <u>DOG CEO Zine</u></p>
+                
+            </footer>
         </div>
     </div>
     

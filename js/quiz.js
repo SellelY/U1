@@ -1,24 +1,26 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-    const loggedIn = localStorage.getItem("loggedIn");
-    if(loggedIn === "true") {
-        quizPage();
-    }
-});
-
 function quizPage() {
+    
+    // const username = document.querySelector(".username").value;
+    // document.querySelector(".display-username").textContent = `${username}`;
+    const username = document.querySelector(".username").value;
+    const displayUsername = document.querySelector(".display-username");
+    const logoutButton = document.querySelector(".logout-button");
+    const quizPage = document.querySelector("#quiz-page");
 
-    const quizDiv = document.querySelector("#quiz-page");
-    quizDiv.classList.remove("hidden");
+    if(!displayUsername.textContent) {
+        displayUsername.textContent = `${username}`;
+    }
 
-    const logoutButton = document.createElement = ("button");
-    logoutButton.className = "button";
-    logoutButton.textContent = "Logout";
-    logoutButton.addEventListener("click", () => {
-        logout();
+    quizPage.style.display = "block";
+    localStorage.setItem("isLoginRegisterHidden", "true");
+
+
+    loginButton.addEventListener("click", () => {
+        quizPage.style.display = "none";
+        document.querySelector("#login_register").classList.remove("hidden");
+        displayUsername.textContent ="";
     });
-
-    const div = document.querySelector("#quizPage");
-    div.appendChild(logoutButton);
 }
+
