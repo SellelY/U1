@@ -96,7 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
+async function fetchRqst(rqst) {
+    const responce = await fetch(rqst);
+    console.log("Hej");
+    return responce;
+}
   
   
   

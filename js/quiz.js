@@ -1,5 +1,6 @@
 "use strict";
 
+
 function quizPage() {
 
     const username = document.querySelector(".username").value;
@@ -27,74 +28,59 @@ function quizPage() {
         localStorage.removeItem("username");
     })
 
-    async function getRandomDogImage() {
+        
+        async function getRandomDogImage() {
 
-        const messageDiv = document.querySelector("#message");
-        const _status = document.querySelector(".status");
-        const closeButton = document.querySelector(".close");
-        closeButton.style.display = "none";
+            const messageDiv = document.querySelector("#message");
+            const _status = document.querySelector(".status");
+            const closeButton = document.querySelector(".close");
+            closeButton.style.display = "none";
 
-        messageDiv.classList.remove("hidden");
-        _status.textContent = "Loading new dog-image...";
+            messageDiv.classList.remove("hidden");
+            _status.textContent = "Loading new dog-image...";
+        
+            
 
-        const url = "https://dog.ceo/api/breeds/image/random"
-      
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
-          await new Promise(resolve => setTimeout(resolve, 2000))
+            async function fetchRandomImage() {
+                const randomBreed = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+                const url = `https://dog.ceo/api/breed/${randomBreed.url}/images/random`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
+                }
+                messageDiv.classList.add("hidden");
+                const data = await response.json();
+                return data.message;
+                }
 
-          messageDiv.classList.add("hidden");
-          
-          const breed = data.message.split("/").slice(-2, -1)[0];
-          const breedData = ALL_BREEDS.find(b => b.url.includes(breed));
+                const imageUrl = await fetchRandomImage();
+                const imgElement = document.getElementById("dog-image");
+                imgElement.setAttribute("src", imageUrl);
 
-          if( breedData ) {
+                
 
-            const imageUrl = `https://dog.ceo/api/breed/${breedData.url}/images/random`;
-            const imageResponse = await fetch(imageUrl);
-            const imageData = await imageResponse.json();
-            displayImage(imageData.message);
-
-          } else {
-            displayImage(data.message);
-          }
-        } catch (error) {
-          console.log("Error" + error);
         }
-      }
+    
+        getRandomDogImage();
 
-      const answerButtons = document.querySelectorAll(".answer-button");
-      answerButtons.forEach(button => {
-        button.addEventListener("click", event => {
-            const isCorrect = event.target.dataset.isCorrect === "true";
-            if(isCorrect) {
-                console.log("bravo!")
-            } else {
-                console.log("Incorrect!")
+        const breedData = ALL_BREEDS[Math.floor(Math.random() * ALL_BREEDS.length)];
+        const buttonContainer = document.querySelector(".button-container");
+        const buttons = buttonContainer.querySelectorAll(".quiz-answers");
+
+        buttons.forEach(button => {
+            button.textContent = getRandomBreedName();
+
+            if(button.textContent === breedData.name) {
+                button.classList.add("correct");
             }
         });
-      });
-      
-      function displayImage(image) {
-        const imgElement = document.querySelector("#dog-image");
 
-        if(image) {
-            imgElement.src = image;
-        }
-      }
-      
-      getRandomDogImage();
-
-      function getRandomBreedName() {
-        const randomIndex = Math.floor(Math.random() * ALL_BREEDS.length);
-        return ALL_BREEDS[randomIndex].name;
-      }
-
-      const quizAnswers = document.querySelectorAll(".quiz-answers");
-      quizAnswers.forEach( button => {
-        button.textContent = getRandomBreedName();
-      })
+        function getRandomBreedName() {
+  const randomIndex = Math.floor(Math.random() * ALL_BREEDS.length);
+  return ALL_BREEDS[randomIndex].name;
+}
+  
       
 }
+
 
