@@ -16,6 +16,7 @@
             </div>
         </div>
     </div>
+
     <header>
         <img id="logo" src="./media/logo.png" alt="">
         <p>Dog Breed Quiz</p>
@@ -31,10 +32,22 @@
         </div>
 
         <div class="dog-pictures">
-            <img id="dog-image"/>
+            <img src="./media/logo.png" id="dog-image" alt="">
         </div>
-        <div class="answer-buttons"></div>
 
+        <div class="button-container">
+            <button class="quiz-answers"></button>
+            <button class="quiz-answers"></button>
+            <button class="quiz-answers"></button>
+            <button class="quiz-answers"></button>
+        </div>
+
+        <div class="quiz-message-container">
+        </div>
+
+        <div class="footer-quiz">
+            <p class="footer__text">The Dog Quiz is made possible thanks to <br>the free API by <u>DOG CEO Zine</u></p>
+        </div>
     </div>
 
     <div id="login_register">
@@ -57,7 +70,7 @@
                 <div class="form__message form__message-error"></div>
                 <p class="wrong-user-pass hidden">Wrong username or password</p>
                 <p class="form__text">Let the magic start!</p>
-                <button type="submit">Login</button>
+                <button class="button" type="submit">Login</button>
                 <p class="form__register">
                     <a id="linkCreateAccount">New to this? Register for free</a>
                 </p>
@@ -82,7 +95,7 @@
                 </div>
     
                 <p class="form__text">Ready when you are...</p>
-                <button type="submit">Register</button>
+                <button class="button" type="submit">Register</button>
                 <p class="form__register">
                     <a id="linkLogin">Already have an account? Go to login</a>
                 </p>
