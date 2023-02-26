@@ -201,10 +201,9 @@ a {
     display: grid;
     margin: 10px 20px;
     grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
 }
 
 .quiz-answers {
-
     padding: 10px;
-    
 } 

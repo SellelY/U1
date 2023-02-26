@@ -29,53 +29,32 @@ function quizPage() {
 
     async function getRandomDogImage() {
 
-        function getRandomBreeds(breeds) {
+        const messageDiv = document.querySelector("#message");
+        const _status = document.querySelector(".status");
+        const closeButton = document.querySelector(".close");
+        closeButton.style.display = "none";
 
-            const randomBreeds = [];
-            while(randomBreeds.length < 4) {
-                const randomIndex = Math.floor(Math.random() * breeds.length);
-                const randomBreed = breeds[randomIndex].name;
-                if( !randomBreeds.includes(randomBreed) ) {
-                    randomBreeds.push(randomBreed);
-                }
-            }
-            return randomBreeds;
-        
-            
-          }
+        messageDiv.classList.remove("hidden");
+        _status.textContent = "Loading new dog-image...";
 
         const url = "https://dog.ceo/api/breeds/image/random"
       
         try {
           const response = await fetch(url);
           const data = await response.json();
-          await new Promise(resolve => setTimeout(resolve, 1000))
+          await new Promise(resolve => setTimeout(resolve, 2000))
+
+          messageDiv.classList.add("hidden");
           
           const breed = data.message.split("/").slice(-2, -1)[0];
           const breedData = ALL_BREEDS.find(b => b.url.includes(breed));
 
-          if(breedData) {
+          if( breedData ) {
 
             const imageUrl = `https://dog.ceo/api/breed/${breedData.url}/images/random`;
             const imageResponse = await fetch(imageUrl);
             const imageData = await imageResponse.json();
             displayImage(imageData.message);
-            
-            const randomBreeds = getRandomBreeds(ALL_BREEDS);
-            
-           
-            for ( let i = 0; i < 4; i++) {
-                const button =  document.querySelectorAll(".quiz-answers")
-    
-
-                button.textContent === randomBreeds[i];
-                if( button.textContent === breedData.name ) {
-                    button.dataset.isCorrect = "true";
-                } else {
-                   button.dataset.isCorrect = "false";
-                }
-
-            }
 
           } else {
             displayImage(data.message);
@@ -106,6 +85,16 @@ function quizPage() {
       }
       
       getRandomDogImage();
+
+      function getRandomBreedName() {
+        const randomIndex = Math.floor(Math.random() * ALL_BREEDS.length);
+        return ALL_BREEDS[randomIndex].name;
+      }
+
+      const quizAnswers = document.querySelectorAll(".quiz-answers");
+      quizAnswers.forEach( button => {
+        button.textContent = getRandomBreedName();
+      })
       
 }
 
