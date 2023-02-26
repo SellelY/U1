@@ -12,8 +12,7 @@ body {
     justify-content: center;
     background-image: url("../media/Horizoon.png");
     background-position: center;
-    background-size: cover;
-    backdrop-filter: blur(20px);
+    background-size: inherit;
     flex-direction: column;
 }
 
@@ -80,7 +79,7 @@ header {
     top: 10px;
 }
 
-img {
+#logo {
     height: 30px;
     width: 30px;
     position: relative;
@@ -177,4 +176,17 @@ a {
     bottom: 273px;
     padding: 5px 23px;
     border-radius: 2px;
+}
+
+.dog-pictures {
+    height: 100%;
+    display: flex;
+    margin-top: 170px;
+    align-items: center;
+    flex-direction: column;
+}
+
+#dog-image {
+    width: 90%;
+    border-radius: 10px;
 }

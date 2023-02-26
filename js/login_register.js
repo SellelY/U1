@@ -3,7 +3,6 @@
 async function registerUser(event) {
   event.preventDefault(); // prevent the form from submitting
 
-
   const formElement = event.target;
   const usernameValue = formElement.querySelector(".usernameR").value;
   const passwordValue = formElement.querySelector(".passwordR").value;
@@ -65,6 +64,7 @@ async function loginUser(event) {
     document.querySelector("#login_register").classList.add("hidden");
     messageDiv.classList.add("hidden");
     quizPage();
+    localStorage.setItem("quizState", "visible");
     
   }
 
@@ -80,25 +80,7 @@ window.onload = function() {
   const passwordInput = document.querySelectorAll(".password");
   const usernameRInput = document.querySelector(".usernameR");
   const passwordRInput = document.querySelector(".passwordR");
-
-  if(registerForm !== null) {
-    usernameRInput.value = "";
-    passwordRInput.value = "";
-  }
-
-  if(loginForm !== null) {
-    usernameInput.forEach(input => input.value = "");
-    passwordInput.forEach(input => input.value = "");
-  }
-}
-
-window.onload = function() {
-  const registerForm = document.querySelector("#register");
-  const loginForm = document.querySelector("#login");
-  const usernameInput = document.querySelectorAll(".username");
-  const passwordInput = document.querySelectorAll(".password");
-  const usernameRInput = document.querySelector(".usernameR");
-  const passwordRInput = document.querySelector(".passwordR");
+  const loginRegister = document.querySelector("#login_register");
 
   if (registerForm !== null) {
     usernameRInput.value = "";
@@ -110,23 +92,13 @@ window.onload = function() {
     passwordInput.forEach(input => input.value = "");
   }
 
-  // get stored classlist "hidden"
-  const loginRegister = document.querySelector("#login_register");
-  const quizPage = document.querySelector("#quiz-page");
-  const isHidden = localStorage.getItem("isLoginRegisterHidden");
-
-  if(isHidden === "true") {
+  const quizState = localStorage.getItem("quizState");
+  if( quizState === "visible" ) {
     loginRegister.classList.add("hidden");
-    quizPage.style.display = "block";
+    quizPage();
   } else {
     loginRegister.classList.remove("hidden");
-    quizPage.style.display = "none";
+    localStorage.setItem("quizState", "hidden");
   }
-
-  const logoutButton = document.querySelector(".logout-button");
-  logoutButton.addEventListener("click", () => {
-    quizPage.style.display = "none";
-    loginRegister.classList.remove("hidden");
-  })
 
 };

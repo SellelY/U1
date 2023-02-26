@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         registerForm.classList.remove("form--hidden");
 
         prevBackgroundImage = document.body.style.backgroundImage; // store the current back-image
-        document.body.style.backgroundImage = "url('../media/worldWater.jpeg')"; // add new back-image
+        document.body.style.backgroundImage = "url('../media/worldWater.jpg')"; // add new back-image
   
     });
 
