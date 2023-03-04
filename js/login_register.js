@@ -76,21 +76,16 @@ loginForm.addEventListener("submit", loginUser);
 window.onload = function() {
   const registerForm = document.querySelector("#register");
   const loginForm = document.querySelector("#login");
-  const usernameInput = document.querySelectorAll(".username");
-  const passwordInput = document.querySelectorAll(".password");
+  const usernameInput = document.querySelector(".username");
+  const passwordInput = document.querySelector(".password");
   const usernameRInput = document.querySelector(".usernameR");
   const passwordRInput = document.querySelector(".passwordR");
   const loginRegister = document.querySelector("#login_register");
 
-  if (registerForm !== null) {
-    usernameRInput.value = "";
-    passwordRInput.value = "";
-  }
-
-  if (loginForm !== null) {
-    usernameInput.forEach(input => input.value = "");
-    passwordInput.forEach(input => input.value = "");
-  }
+  usernameRInput.value = "";
+  passwordRInput.value = "";
+  usernameInput.value = "";
+  passwordInput.value = "";
 
   const quizState = localStorage.getItem("quizState");
   if( quizState === "visible" ) {

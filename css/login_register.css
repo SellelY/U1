@@ -68,6 +68,8 @@ body {
     background-color: white;
     padding: 10px 100px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -131,7 +133,7 @@ h1 {
     border-radius: 2px;
     z-index: 1;
     position: absolute;
-    top: 325px;
+    top: 335px;
 }
 
 .button {
@@ -207,3 +209,7 @@ a {
 .quiz-answers {
     padding: 10px;
 } 
+
+.status {
+    text-align: center;
+}

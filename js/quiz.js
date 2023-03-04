@@ -33,6 +33,8 @@ function quizPage() {
         const messageDiv = document.querySelector("#message");
         const _status = document.querySelector(".status");
         const closeButton = document.querySelector(".close");
+        const messageContainer = document.querySelector(".message-container");
+        const messageHolder = document.querySelector("#message-holder");
         closeButton.style.display = "none";
       
         messageDiv.classList.remove("hidden");
@@ -59,34 +61,55 @@ function quizPage() {
       
         const buttonContainer = document.querySelector(".button-container");
         const buttons = buttonContainer.querySelectorAll(".quiz-answers");
+
       
-        buttons.forEach(button => {
-          button.textContent = getRandomBreedName();
+        let randomButtonIndex = Math.floor(Math.random() * buttons.length);
+
+        buttons.forEach((button, index) => {
+          if (index === randomButtonIndex) {
+            button.textContent = breedName;
+          } else {
+            button.textContent = getRandomBreedName();
+          }
+
           if (button.textContent === breedName) {
-            button.setAttribute("data-breed-name", breedName);
+            button.classList.add("correct");
+          } else {
+            button.classList.remove("correct");
+          }
+
+          button.addEventListener("click", () => {
+            if (button.classList.contains("correct")) {
+              messageContainer.style.height = "140%"
+              messageHolder.style.backgroundColor = "lightgreen";
+              messageDiv.classList.remove("hidden");
+              _status.textContent = "CORRECT!";
+              closeButton.style.display = "block";
+              closeButton.textContent = "Next breed";
+            } else {
+              messageContainer.style.height = "140%"
+              messageHolder.style.backgroundColor = "red";
+              messageDiv.classList.remove("hidden");
+              _status.textContent = "Incorrect :(";
+              closeButton.style.display = "block";
+              closeButton.textContent = "Try again!"
+            }
+          });
+        });
+
+        closeButton.addEventListener("click", () => {
+          messageDiv.classList.add("hidden");
+          closeButton.style.display = "none";
+          if (_status.textContent === "CORRECT!") {
+            getRandomDogImage();
           }
         });
-      
+
         function getRandomBreedName() {
           const randomIndex = Math.floor(Math.random() * ALL_BREEDS.length);
           return ALL_BREEDS[randomIndex].name;
         }
-
-        buttons.forEach((button, index) => {
-            button.textContent = ALL_BREEDS[index].name;
-            if (ALL_BREEDS[index].name === breedName) {
-              button.classList.add("correct");
-            }
-        
-            button.addEventListener("click", () => {
-              if (button.classList.contains("correct")) {
-                console.log("CORRECT!");
-              } else {
-                console.log("incorrect");
-              }
-            });
-          });
-        }
+      }
         
       
       getRandomDogImage();
