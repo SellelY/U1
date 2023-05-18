@@ -1,7 +1,39 @@
 "use strict";
 
-
 function quizPage() {
+    main.innerHTML = `
+      <div id="message" class="hidden">
+        <div class="message-container">
+            <div id="message-holder">
+                <p class="status"></p>
+                <button class="close close--hidden">CLOSE</button>
+            </div>
+        </div>
+      </div>  
+    
+      <div id="quiz-page">
+
+        <div class="header-div">
+            <div>
+                <p class="display-username"></p>
+                <button class="logout-button">Logout</button>
+            </div>
+        </div>
+
+        <div class="dog-pictures">
+            <img src="./media/logo.png" id="dog-image" alt="">
+        </div>
+
+        <div class="button-container">
+            <button class="quiz-answers"></button>
+            <button class="quiz-answers"></button>
+            <button class="quiz-answers"></button>
+            <button class="quiz-answers"></button>
+        </div>
+
+      </div>
+
+    `;
 
     const username = document.querySelector(".username").value;
     const displayUsername = document.querySelector(".display-username");

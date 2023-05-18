@@ -3,6 +3,74 @@
 async function registerUser(event) {
   event.preventDefault(); // prevent the form from submitting
 
+  main.innerHTML = `
+    <div id="message" class="hidden">
+      <div class="message-container">
+          <div id="message-holder">
+              <p class="status"></p>
+              <button class="close close--hidden">CLOSE</button>
+          </div>
+      </div>
+    </div>  
+  
+    <div id="login_register">
+      
+      <div class="container">
+          <form class="form" id="login">
+              <div class="login__container">
+                  <h1 class="form__title">LOGIN</h1>
+
+              <div class="form__input-group">
+                  <label for="username">Username:</label>
+                  <input type="text" name="username" class="username" autofocus>
+              </div>
+
+              <div class="form__input-group">
+                  <label for="password">Password:</label>
+                  <input type="password" class="password" autofocus>
+              </div>
+              
+              <div class="form__message form__message-error"></div>
+              <p class="wrong-user-pass hidden">Wrong username or password</p>
+              <p class="form__text">Let the magic start!</p>
+              <button class="button" type="submit">Login</button>
+              <p class="form__register">
+                  <a id="linkCreateAccount">New to this? Register for free</a>
+              </p>
+
+              
+              </div>
+          </form>
+
+      <div class="container">
+          <form class="form form--hidden" id="register" action="" method="POST">
+              <div class="login__container">
+                  <h1 class="form__title">REGISTER</h1>
+
+              <div class="form__input-group">
+                  <label for="username">Username:</label>
+                  <input type="text" class="usernameR" autofocus>
+              </div>
+
+              <div class="form__input-group">
+                  <label for="password">Password:</label>
+                  <input type="password" class="passwordR" autofocus>
+              </div>
+
+              <p class="form__text">Ready when you are...</p>
+              <button class="button" type="submit">Register</button>
+              <p class="form__register">
+                  <a id="linkLogin">Already have an account? Go to login</a>
+              </p>
+
+              </div>
+          </form>
+      
+      </div>
+  </div>
+
+  `;
+
   const formElement = event.target;
   const usernameValue = formElement.querySelector(".usernameR").value;
   const passwordValue = formElement.querySelector(".passwordR").value;

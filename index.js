@@ -9,4 +9,6 @@ skicka en request. Det är i den funktionen som fetch-används.
 
 const URL = "https://teaching.maumt.se/apis/access/";
 
+let main = document.querySelector("main");
+
 
